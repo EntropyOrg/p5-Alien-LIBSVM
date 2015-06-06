@@ -1,0 +1,26 @@
+---
+abstract: 'Alien package for the LIBSVM library'
+author:
+  - 'Zakariyya Mughal <zmughal@cpan.org>'
+build_requires:
+  Test::More: 0
+configure_requires:
+  Alien::Base: 0.002
+  File::ShareDir: 1.03
+dynamic_config: 0
+generated_by: 'Dist::Zilla version 5.029, CPAN::Meta::Converter version 2.143240'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Alien-LIBSVM
+requires:
+  Alien::Base: 0.002
+  File::ShareDir: 1.03
+  parent: 0
+  strict: 0
+  warnings: 0
+resources:
+  homepage: https://github.com/EntropyOrg/p5-Alien-LIBSVM
+  repository: https://github.com/EntropyOrg/p5-Alien-LIBSVM.git
+version: 0.001
