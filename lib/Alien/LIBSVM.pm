@@ -11,7 +11,11 @@ sub Inline {
 	+{
 		LIBS => $self->libs,
 		INC => $self->cflags,
-		#AUTO_INCLUDE => # TODO
+		AUTO_INCLUDE => q|
+
+#include "svm.h"
+
+|
 	};
 }
 
