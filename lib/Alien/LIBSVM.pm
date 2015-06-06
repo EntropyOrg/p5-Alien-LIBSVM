@@ -19,6 +19,20 @@ sub Inline {
 	};
 }
 
+sub svm_train_path {
+  my ($self) = @_;
+  File::Spec->catfile( $self->dist_dir , 'bin', 'svm-train' );
+}
+
+sub svm_predict_path {
+  my ($self) = @_;
+  File::Spec->catfile( $self->dist_dir , 'bin', 'svm-predict' );
+}
+
+sub svm_scale_path {
+  my ($self) = @_;
+  File::Spec->catfile( $self->dist_dir , 'bin', 'svm-scale' );
+}
 
 1;
 # ABSTRACT: Alien package for the LIBSVM library
