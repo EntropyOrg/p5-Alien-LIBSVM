@@ -18,6 +18,29 @@ sub alien_do_commands {
 	}
 }
 
+sub main::alien_patch {
+	my $makefile = 'Makefile';
+	my $makefile_new = "$makefile.tmp";
+
+	open my $in,  '<', $makefile;
+	open my $out, '>', $makefile_new;
+
+	while(<$in>) {
+		if(/^SHVER = 2/) {
+			# real version is 3.x
+			print $out <<END
+SHVER = 3
+END
+		} else {
+			print $out $_;
+		}
+	}
+	close $in;
+	close $out;
+	unlink $makefile;
+	rename $makefile_new, $makefile;
+}
+
 sub main::install_helper {
 	my $dir = $ARGV[0];
 
@@ -28,7 +51,7 @@ sub main::install_helper {
 		@headers = ( 'svm.h' );
 		@bins = map { File::Spec->catfile( 'windows', "$_.exe" ) } @bin_names;
 	} else {
-		@libs = ( 'libsvm.so.2', 'libsvm.a' );
+		@libs = ( 'libsvm.so.3', 'libsvm.a' );
 		@headers = ( 'svm.h' );
 		@bins = @bin_names;
 	}
@@ -38,7 +61,7 @@ sub main::install_helper {
 		qw(lib include bin);
 
 	my @filesys = (
-		{ to => $lib_dir, files => \@libs },
+		{ to => $lib_dir, files => \@libs, symlink => { 'libsvm.so' => 'libsvm.so.3' } },
 		{ to => $header_dir, files => \@headers },
 		{ to => $bin_dir, files => \@bins, exec => 1 },
 	);
@@ -48,6 +71,14 @@ sub main::install_helper {
 		for my $file (@{ $type->{files} }) {
 			cp( $file, $type->{to} ); # cp keeps permissions
 			chmod 'a+x', File::Spec->catfile( $type->{to}, $file ) if exists $type->{exec};
+		}
+		if( $^O ne 'MSWin32' && exists $type->{symlink} ) {
+			# NOTE we assume symlink exists on non-MSWin32 systems
+			while( my ($k, $v) = each %{  $type->{symlink} } ) {
+				symlink(
+					File::Spec->catfile( $type->{to}, $v ),
+					File::Spec->catfile( $type->{to}, $k ) );
+			}
 		}
 	}
 }
