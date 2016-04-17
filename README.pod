@@ -8,7 +8,7 @@ Alien::LIBSVM - Alien package for the LIBSVM library
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 Inline support
 
