@@ -2,7 +2,7 @@
 
 CURDIR=`dirname "$0"`
 cd "$CURDIR"
-VERSION="3.20"
+VERSION="3.21"
 SOURCE_PACKAGE="libsvm-$VERSION"".tar.gz"
 TARGET_DIR="../inc/" # relative to $CURDIR
 mkdir "$TARGET_DIR"
