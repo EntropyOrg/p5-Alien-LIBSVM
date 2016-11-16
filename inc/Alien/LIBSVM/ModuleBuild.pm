@@ -13,6 +13,7 @@ sub alien_do_commands {
 
 	if( $^O eq 'MSWin32' && $phase eq 'build' ) {
 		## nothing to build on Windows
+		return 1;
 	} else {
 		$self->SUPER::alien_do_commands($phase);
 	}
@@ -66,6 +67,7 @@ sub main::install_helper {
 		{ to => $bin_dir, files => \@bins, exec => 1 },
 	);
 
+	local $File::chmod::UMASK = 0;
 	for my $type (@filesys) {
 		make_path $type->{to};
 		for my $file (@{ $type->{files} }) {
