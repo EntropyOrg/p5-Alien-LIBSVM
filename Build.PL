@@ -8,9 +8,8 @@ use lib qw{inc}; use Alien::LIBSVM::ModuleBuild;
 
 my %module_build_args = (
   "alien_build_commands" => [
-    "%x -I../../inc -MAlien::LIBSVM::ModuleBuild -e alien_patch %s",
-    "make",
-    "make lib"
+    "%x -I../../inc -MAlien::LIBSVM::ModuleBuild -e alien_patch",
+    "make all lib"
   ],
   "alien_inline_auto_include" => [],
   "alien_install_commands" => [
@@ -25,14 +24,15 @@ my %module_build_args = (
   },
   "configure_requires" => {
     "Alien::Base::ModuleBuild" => "0.002",
-    "File::ShareDir" => "1.03"
+    "File::ShareDir" => "1.03",
+    "File::chmod" => 0
   },
   "dist_abstract" => "Alien package for the LIBSVM library",
   "dist_author" => [
     "Zakariyya Mughal <zmughal\@cpan.org>"
   ],
   "dist_name" => "Alien-LIBSVM",
-  "dist_version" => "0.002",
+  "dist_version" => "0.003",
   "license" => "perl",
   "module_name" => "Alien::LIBSVM",
   "recursive_test_files" => 1,

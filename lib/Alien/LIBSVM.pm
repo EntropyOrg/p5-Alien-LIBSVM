@@ -1,5 +1,5 @@
 package Alien::LIBSVM;
-$Alien::LIBSVM::VERSION = '0.002';
+$Alien::LIBSVM::VERSION = '0.003';
 use strict;
 use warnings;
 
@@ -49,7 +49,7 @@ Alien::LIBSVM - Alien package for the LIBSVM library
 
 =head1 VERSION
 
-version 0.002
+version 0.003
 
 =head1 Inline support
 
