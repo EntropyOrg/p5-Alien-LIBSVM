@@ -36,16 +36,31 @@ sub Inline {
 	my $params = Alien::Base::Inline(@_);
 }
 
+=method svm_train_path
+
+Path to the C<svm-train> executable.
+
+=cut
 sub svm_train_path {
 	my ($self) = @_;
 	File::Spec->catfile( $self->dist_dir , 'bin', 'svm-train' );
 }
 
+=method svm_predict_path
+
+Path to the C<svm-predict> executable.
+
+=cut
 sub svm_predict_path {
 	my ($self) = @_;
 	File::Spec->catfile( $self->dist_dir , 'bin', 'svm-predict' );
 }
 
+=method svm_scale_path
+
+Path to the C<svm-scale> executable.
+
+=cut
 sub svm_scale_path {
 	my ($self) = @_;
 	File::Spec->catfile( $self->dist_dir , 'bin', 'svm-scale' );
