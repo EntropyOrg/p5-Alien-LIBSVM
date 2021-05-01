@@ -1,9 +1,10 @@
 #!/usr/bin/env perl
 
-use Test::Most tests => 1;
+use Test::Most tests => 3;
 use Path::Tiny;
 
 use Alien::LIBSVM;
+use Capture::Tiny qw(capture_merged);
 
 # From <https://github.com/cjlin1/libsvm/blob/master/heart_scale>
 my $heart_scale_data_head5 = <<EOF;
@@ -19,6 +20,16 @@ subtest "Run svm-train" => sub {
 	$temp->spew_utf8( $heart_scale_data_head5 );
 
 	is system( Alien::LIBSVM->svm_train_path, $temp ), 0, 'svm-train runs';
+};
+
+subtest "Run svm-predict" => sub {
+	like capture_merged { system( Alien::LIBSVM->svm_predict_path ) },
+		qr/svm-predict/, 'svm-predict runs';
+};
+
+subtest "Run svm-scale" => sub {
+	like capture_merged { system( Alien::LIBSVM->svm_scale_path ) },
+		qr/svm-scale/, 'svm-scale runs';
 };
 
 done_testing;
